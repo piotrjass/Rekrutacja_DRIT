@@ -9,6 +9,7 @@ using Soneta.KadryPlace;
 using Soneta.Types;
 using Rekrutacja.Workers.Template;
 
+
 //Rejetracja Workera - Pierwszy TypeOf określa jakiego typu ma być wyświetlany Worker, Drugi parametr wskazuje na jakim Typie obiektów będzie wyświetlany Worker
 [assembly: Worker(typeof(TemplateWorker), typeof(Pracownicy))]
 namespace Rekrutacja.Workers.Template
@@ -19,49 +20,27 @@ namespace Rekrutacja.Workers.Template
         public class TemplateWorkerParametry : ContextBase
         {
 
-            // operacje liczbowe
-
             [Caption("Data obliczeń")]
             public Date DataObliczen { get; set; }
 
             [Caption("Wartość A")]
-            public int ValueA { get; set; }
+            public double ValueA { get; set; }
 
             [Caption("Wartość B")]
-            public int ValueB { get; set; }
+            public double ValueB { get; set; }
 
             [Caption("Operacja liczbowa")]
             public MathOperation Operation { get; set; }
 
-            // liczeenie pola figury
-
-            // [Caption("Data obliczeń")]
-            // public Date DataObliczen { get; set; }
-
-            // [Caption("Wartość A")]
-            // public string ValueA { get; set; }
-
-            // [Caption("Wartość B")]
-            // public string ValueB { get; set; }
-
-            // [Caption("Figura")]
-            // public Figure FigureOperation { get; set; }
 
             public TemplateWorkerParametry(Context context) : base(context)
             {
-
-                // operacje liczbowe
 
                 this.DataObliczen = Date.Today;
                 this.ValueB = 0;
                 this.ValueB = 0;
                 this.Operation = MathOperation.Dodawanie;
 
-                // liczenie pola figury
-                // this.DataObliczen = Date.Today;
-                // this.ValueB = "";
-                // this.ValueB = "";
-                // this.FigureOperation = Figure.Kwadrat;
             }
         }
         //Obiekt Context jest to pudełko które przechowuje Typy danych, aktualnie załadowane w aplikacji
@@ -104,65 +83,35 @@ namespace Rekrutacja.Workers.Template
 
                     // operacje liczbowe
 
-                    // for (int i = 0; i < pracownicy.Length; i++)
-                    // {
-                    //     pracownik = pracownicy[i];
-                    //     //Pobieramy obiekt z Nowo utworzonej sesji
-                    //     var pracownikZSesja = nowaSesja.Get(pracownik);
-                    //     double result = 0;
-                    //     switch (this.Parametry.Operation)
-                    //     {
-                    //         case MathOperation.Dodawanie:
-                    //             result = this.Parametry.ValueA + this.Parametry.ValueB;
-                    //             break;
-                    //         case MathOperation.Odejmowanie:
-                    //             result = this.Parametry.ValueA - this.Parametry.ValueB;
-                    //             break;
-                    //         case MathOperation.Mnożenie:
-                    //             result = this.Parametry.ValueA * this.Parametry.ValueB;
-                    //             break;
-                    //         case MathOperation.Dzielenie:
-                    //             if (this.Parametry.ValueB != 0)
-                    //                 result = this.Parametry.ValueA / this.Parametry.ValueB;
-                    //             else
-                    //                 throw new InvalidOperationException("Cannot divide by zero.");
-                    //             break;
-                    //     }
-
-                    // liczenie pola figury
-
-                    /*
-                    for (int i = 0; i < pracownicy.Length; i++)
-                    {
-                        pracownik = pracownicy[i];
-                        var pracownikZSesja = nowaSesja.Get(pracownik);
-                        int result = 0;
-                        int parameterA = StringToIntConverter.Convert(this.Parametry.ValueA);
-                        int parameterB = StringToIntConverter.Convert(this.Parametry.ValueB)
-                        
-                        switch (this.Parametry.Operation)
-                        {
-                            case MathOperation.Dodawanie:
-                                result =  parameterA + parameterB
-                                break;
-                            case MathOperation.Odejmowanie:
-                                result = parameterA - parameterB
-                                break;
-                            case MathOperation.Mnożenie:
-                                result = parameterA * parameterB
-                                break;
-                            case MathOperation.Dzielenie:
-                                if (this.Parametry.ValueB != 0)
-                                    result = parameterA / parameterB
+                     for (int i = 0; i < pracownicy.Length; i++)
+                     {
+                         pracownik = pracownicy[i];
+                         //Pobieramy obiekt z Nowo utworzonej sesji
+                         var pracownikZSesja = nowaSesja.Get(pracownik);
+                         double result = 0;
+                         switch (this.Parametry.Operation)
+                         {
+                             case MathOperation.Dodawanie:
+                                 result = this.Parametry.ValueA + this.Parametry.ValueB;
+                                 break;
+                             case MathOperation.Odejmowanie:
+                                 result = this.Parametry.ValueA - this.Parametry.ValueB;
+                                 break;
+                             case MathOperation.Mnożenie:
+                                 result = this.Parametry.ValueA * this.Parametry.ValueB;
+                                 break;
+                             case MathOperation.Dzielenie:
+                                 if (this.Parametry.ValueB != 0)
+                                    result = Math.Round((double)this.Parametry.ValueA / this.Parametry.ValueB, 2);
                                 else
-                                    throw new InvalidOperationException("Cannot divide by zero.");
-                                break;
-                        }
+                                     throw new InvalidOperationException("Cannot divide by zero.");
+                                 break;
+                         }
 
                         pracownikZSesja.Features["DataObliczen"] = this.Parametry.DataObliczen;
                         pracownikZSesja.Features["Wynik"] = result;
                     }
-                    */
+                    
 
                     //Features - są to pola rozszerzające obiekty w bazie danych, dzięki czemu nie jestesmy ogarniczeni to kolumn jakie zostały utworzone przez producenta
                     //Zatwierdzamy zmiany wykonane w sesji
