@@ -4,7 +4,7 @@ using System;
 public class StringToIntConverter
 {
 
-    public int Convert(string s)
+    public static int Convert(string s)
     {
         int result = 0;
         bool isNegative = false;
